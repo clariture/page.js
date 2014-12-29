@@ -15,11 +15,10 @@
   module.exports = page;
 
   /**
-   * To work properly with the URL
-   * history.location generated polyfill in https://github.com/devote/HTML5-History-API
+   * Page location.
    */
 
-  var location = window && (window.history.location || window.location);
+  var location;
 
   /**
    * Perform initial dispatch.
@@ -139,6 +138,13 @@
     options = options || {};
     if (running) return;
     running = true;
+
+    /**
+    * To work properly with the URL
+    * history.location generated polyfill in https://github.com/devote/HTML5-History-API
+    */
+    location = window.history.location || window.location;
+
     if (false === options.dispatch) dispatch = false;
     if (false === options.decodeURLComponents) decodeURLComponents = false;
     if (false !== options.popstate) window.addEventListener('popstate', onpopstate, false);
